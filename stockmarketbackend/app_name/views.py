@@ -21,7 +21,6 @@ from .models import Feedback
 # =====================================================
 # INSIGHT FUNCTION
 # =====================================================
-
 def generate_insight(predictions):
     if len(predictions) < 2:
         return "Not enough data to generate insight."
@@ -43,7 +42,6 @@ def generate_insight(predictions):
 # =====================================================
 # SERIALIZERS
 # =====================================================
-
 class FeedbackSerializer(serializers.ModelSerializer):
     class Meta:
         model = Feedback
@@ -68,13 +66,12 @@ class LoginSerializer(serializers.Serializer):
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["id", "username", "email"]   # ✅ EMAIL ADDED
+        fields = ["id", "username", "email"]
 
 
 # =====================================================
 # STOCK VIEW
 # =====================================================
-
 class StockView(APIView):
     parser_classes = [JSONParser]
 
@@ -83,10 +80,7 @@ class StockView(APIView):
         duration = request.data.get("duration")
 
         if not stock or not duration:
-            return Response(
-                {"error": "Provide stock and duration"},
-                status=status.HTTP_400_BAD_REQUEST
-            )
+            return Response({"error": "Provide stock and duration"}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
             data = yf.download(stock, period=duration, interval="1d", progress=False)
@@ -94,8 +88,11 @@ class StockView(APIView):
             if data.empty:
                 return Response({"error": "No data found"}, status=400)
 
-            prices = data["Close"].dropna().values.astype(float)
+            close_series = data["Close"].dropna()
+            if len(close_series) < 2:
+                return Response({"error": "Not enough historical data"}, status=400)
 
+            prices = close_series.values.astype(float)
             x = np.arange(len(prices))
             A = np.vstack([x, np.ones(len(x))]).T
             slope, intercept = np.linalg.lstsq(A, prices, rcond=None)[0]
@@ -105,7 +102,7 @@ class StockView(APIView):
                 future_price = slope * (len(prices) + i) + intercept
                 predictions.append({
                     "date": (datetime.now() + timedelta(days=30 * i)).strftime("%Y-%m"),
-                    "price": round(float(future_price), 2)
+                    "price": round(float(np.array(future_price).item()), 2)
                 })
 
             trend = "up" if slope > 0 else "down"
@@ -119,13 +116,14 @@ class StockView(APIView):
             })
 
         except Exception as e:
+            import traceback
+            print(traceback.format_exc())
             return Response({"error": str(e)}, status=500)
 
 
 # =====================================================
 # FEATURED STOCK VIEW
 # =====================================================
-
 class FeaturedStockView(APIView):
 
     def post(self, request):
@@ -140,13 +138,13 @@ class FeaturedStockView(APIView):
         for s in stocks:
             try:
                 data = yf.download(s, period="5d", interval="1d", progress=False)
-                close = data["Close"].dropna()
+                close_series = data["Close"].dropna()
 
-                if len(close) < 2:
+                if len(close_series) < 2:
                     continue
 
-                current_price = float(close.iloc[-1])
-                previous_price = float(close.iloc[-2])
+                current_price = float(close_series.iloc[-1].item())
+                previous_price = float(close_series.iloc[-2].item())
                 change = ((current_price - previous_price) / previous_price) * 100
 
                 result.append({
@@ -157,7 +155,8 @@ class FeaturedStockView(APIView):
                     "percentage_change": round(change, 2)
                 })
 
-            except Exception:
+            except Exception as e:
+                print(f"Error fetching {s}: {e}")
                 continue
 
         return Response(result)
@@ -166,12 +165,10 @@ class FeaturedStockView(APIView):
 # =====================================================
 # NEWS VIEW
 # =====================================================
-
 class NewsView(APIView):
 
     def post(self, request):
         api_key = os.getenv("NEWS_API_KEY")
-
         if not api_key:
             return Response([])
 
@@ -196,26 +193,21 @@ class NewsView(APIView):
 
             return Response(articles)
 
-        except Exception:
+        except Exception as e:
+            print(f"News API error: {e}")
             return Response([])
 
 
 # =====================================================
 # AUTH VIEWS
 # =====================================================
-
 class RegisterView(APIView):
 
     def post(self, request):
         serializer = RegisterSerializer(data=request.data)
-
         if serializer.is_valid():
             serializer.save()
-            return Response(
-                {"message": "User registered successfully"},
-                status=201
-            )
-
+            return Response({"message": "User registered successfully"}, status=201)
         return Response(serializer.errors, status=400)
 
 
@@ -223,27 +215,22 @@ class LoginView(APIView):
 
     def post(self, request):
         serializer = LoginSerializer(data=request.data)
-
         if serializer.is_valid():
             user = authenticate(
                 username=serializer.validated_data["username"],
                 password=serializer.validated_data["password"]
             )
-
             if user:
                 refresh = RefreshToken.for_user(user)
                 return Response({
                     "access_token": str(refresh.access_token),
                     "refresh_token": str(refresh)
                 })
-
             return Response({"error": "Invalid credentials"}, status=401)
-
         return Response(serializer.errors, status=400)
 
 
 class ProfileView(APIView):
-
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
@@ -254,7 +241,6 @@ class ProfileView(APIView):
 # =====================================================
 # FEEDBACK VIEW
 # =====================================================
-
 class FeedbackListCreateView(APIView):
 
     def get(self, request):
@@ -264,9 +250,7 @@ class FeedbackListCreateView(APIView):
 
     def post(self, request):
         serializer = FeedbackSerializer(data=request.data)
-
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=201)
-
         return Response(serializer.errors, status=400)
