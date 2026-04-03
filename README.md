@@ -1,251 +1,233 @@
-# 🚀 Smart Stock Prediction System
-### AI-Powered Market Forecasting & Analytics Platform
+🚀 Smart Stock Prediction System
+AI-Powered Market Forecasting & Investment Insight Platform
 
-An intelligent full-stack web application that predicts stock price trends, analyzes market momentum, and provides AI-generated investment insights for Indian stock market investors.
+A full-stack financial analytics platform that predicts stock price trends, analyzes momentum, and generates AI-driven investment insights for the Indian stock market.
 
-Built with **React + Django REST + Machine Learning Logic**
+Built with React + TypeScript + Django REST Framework + NumPy
 
----
+📌 Overview
 
-## 📌 Problem Statement
+The Smart Stock Prediction System is a production-structured full-stack web application designed to help investors understand stock trends using mathematical forecasting models.
 
-Retail investors often struggle with:
+It integrates:
 
-- Understanding stock trends 📉
-- Predicting future price movement 📈
-- Interpreting raw financial data
-- Making data-driven investment decisions
+📊 Real-time NSE stock data
+🤖 AI-based price trend prediction
+📈 Market momentum analysis
+📰 Financial news integration
+🔐 JWT-secured authentication system
 
-This project simplifies stock analysis by providing:
+This project demonstrates practical implementation of data analysis, backend APIs, authentication, and frontend state management in a real-world financial use case.
 
-✔ Trend prediction  
-✔ AI-generated insights  
-✔ Featured NSE stocks  
-✔ Market news integration  
-✔ Clean dashboard UI  
+🧠 Problem Statement
 
----
+Retail investors often face:
 
-## 🧠 Why This Project?
+Difficulty interpreting stock trends
+Lack of structured forecasting tools
+Complex and expensive financial platforms
+Limited data-driven insights
 
-Stock prediction platforms are usually:
+This system simplifies stock analysis by providing:
 
-- Expensive 💰
-- Complex 📊
-- Not beginner-friendly
+✔ 6-month future price prediction
+✔ Trend direction detection
+✔ AI-generated explanatory insights
+✔ Featured NSE stocks dashboard
+✔ Clean and intuitive UI
 
-This system provides:
-
-> ⚡ Lightweight AI-based forecasting  
-> ⚡ Clean dashboard  
-> ⚡ JWT-secured authentication  
-> ⚡ Real-time data integration  
-
-Perfect for educational, portfolio, and research purposes.
-
----
-
-# 🏗️ System Architecture
-
+🏗️ System Architecture
 Frontend (React + TypeScript)
-        ⬇
-REST API (Django + DRF)
-        ⬇
-Prediction Engine (NumPy + Linear Regression)
-        ⬇
+        ↓
+Django REST API
+        ↓
+Prediction Engine (NumPy Linear Regression)
+        ↓
 yFinance Data Source
+        ↓
+NewsAPI Integration
 
----
+The architecture follows a clear separation of concerns:
 
-# ⚙️ Tech Stack
+Frontend → UI & State Management
+Backend → API & Business Logic
+Prediction Engine → Mathematical Forecasting
+External APIs → Market Data
+⚙️ Tech Stack
+🖥️ Frontend
+React
+TypeScript
+Tailwind CSS
+React Router
+TanStack Query
+Axios
+JWT Authentication Handling
+🔙 Backend
+Django
+Django REST Framework
+SimpleJWT
+NumPy
+Pandas
+yFinance
+NewsAPI
+📊 Core Algorithm
+🔹 Linear Regression (Least Squares Method)
+Why Linear Regression?
+Lightweight and fast
+Easily interpretable
+Ideal for trend analysis
+Suitable for portfolio demonstration
+No heavy ML frameworks required
+Prediction Workflow
+Fetch historical stock data using yFinance
+Extract daily closing prices
+Apply Least Squares Linear Regression
+Calculate slope (trend direction)
+Forecast next 6 months
+Generate AI insight based on predicted growth
+📈 Trend Detection Logic
+Condition	Result
+Slope > 0	Bullish Trend 📈
+Slope < 0	Bearish Trend 📉
+🤖 Insight Generation Engine
+Predicted Change %	Insight
+> 5%	Strong Bullish Momentum
+0–5%	Gradual Upward Movement
+-5–0%	Slight Decline
+< -5%	Strong Bearish Risk
 
-## 🖥️ Frontend
-- React
-- TypeScript
-- Tailwind CSS
-- React Router
-- JWT Authentication
-- TanStack Query
+This makes the system explanatory, not just predictive.
 
-## 🔙 Backend
-- Django
-- Django REST Framework
-- SimpleJWT
-- NumPy
-- Pandas
-- yFinance
-- NewsAPI
+🔐 Authentication & Security
+JWT-based authentication
+Access & Refresh tokens
+Protected profile route
+Secure backend endpoints
+Token-based frontend request handling
 
----
+Authentication ensures secure user sessions and API access control.
 
-# 📊 Core Algorithm Used
+✨ Key Features
+👤 User Management
+User Registration
+Secure Login
+Profile API
+Token-based Authentication
+📈 Stock Prediction
+Custom stock search (NSE symbols)
+Duration-based historical data selection
+6-month forecast
+AI-based trend classification
+Insight summary
+⭐ Featured Stocks
 
-## 🔹 Linear Regression (NumPy Based)
+Top Indian NSE stocks including:
 
-### Why Linear Regression?
-
-✔ Simple and interpretable  
-✔ Fast computation  
-✔ Lightweight (No heavy ML libraries required)  
-✔ Suitable for trend forecasting  
-✔ Good for portfolio demonstration  
-
-### How It Works:
-
-1. Fetch historical stock data using yFinance
-2. Extract closing prices
-3. Apply Least Squares Linear Regression
-4. Compute slope (trend direction)
-5. Forecast next 6 months prices
-6. Generate AI Insight based on percentage change
-
----
-
-### 📈 Trend Logic
-
-- Slope > 0 → Bullish Trend 📈
-- Slope < 0 → Bearish Trend 📉
-
----
-
-### 🤖 Insight Engine
-
-Based on predicted percentage growth:
-
-| Change % | Insight |
-|----------|----------|
-| > 5% | Strong Bullish Momentum |
-| 0–5% | Gradual Growth |
-| -5–0% | Slight Decline |
-| < -5% | Strong Bearish Risk |
-
-This makes the system not just predictive — but **explanatory**.
-
----
-
-# 🔐 Authentication System
-
-- JWT-based secure login
-- Access & Refresh tokens
-- Protected profile route
-- Secure API communication
-
----
-
-# ✨ Key Features
-
-## 🔐 User System
-- Register
-- Login
-- Profile
-- Logout
-
-## 📈 Stock Prediction
-- Custom stock search
-- Duration selection
-- 6-Month future forecast
-- AI-based trend analysis
-- Insight summary
-
-## ⭐ Featured Stocks
-Top Indian NSE stocks like:
-- TCS
-- INFY
-- RELIANCE
-- HDFCBANK
-- ICICIBANK
-- SBIN
-- LT
-- ITC
-- HINDUNILVR
-
-## 📰 Market News
-- Integrated NewsAPI
-- Real-time Indian market headlines
-
-## 💬 Feedback System
-- Users can submit feedback
-- Backend-stored entries
-
----
-
-# 📂 Project Structure
-
+TCS
+INFY
+RELIANCE
+HDFCBANK
+ICICIBANK
+SBIN
+LT
+ITC
+HINDUNILVR
+📰 Market News
+Integrated NewsAPI
+Real-time Indian stock market headlines
+💬 Feedback System
+User feedback submission
+Backend-stored feedback records
+📂 Project Structure
 Smart-Stock-Prediction/
 │
-├── frontend/ (React App)
-├── backend/  (Django REST API)
+├── frontend/              # React + TypeScript App
+│   ├── components/
+│   ├── pages/
+│   ├── api/
+│   └── main.tsx
+│
+├── backend/               # Django REST API
+│   ├── app_name/
+│   │   ├── views.py
+│   │   ├── models.py
+│   │   └── serializers.py
+│   └── settings.py
+│
 └── README.md
-
----
-
-# 🚀 How To Run
-
-## Backend
-
+🚀 Installation & Setup
+🔙 Backend Setup
 cd backend
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+python manage.py migrate
 python manage.py runserver
 
+Server runs at:
 
-## Frontend
-
+http://127.0.0.1:8000/
+🖥️ Frontend Setup
 cd frontend
 npm install
 npm run dev
 
+Frontend runs at:
 
----
-
-# 📊 Sample API Response (Stock Prediction)
-
-```json
+http://localhost:5173/
+📊 Sample API Response
 {
   "symbol": "TCS.NS",
   "trend": "up",
   "predictions": [
-    { "date": "2026-05", "price": 4120.45 }
+    { "date": "2026-05", "price": 4120.45 },
+    { "date": "2026-06", "price": 4180.20 }
   ],
-  "insight": "The model predicts strong bullish momentum with significant price growth potential."
+  "insight": "Strong bullish momentum detected."
 }
-🎯 What Makes This Project Strong?
+🎯 Why This Project Stands Out
 
-✔ Full-stack architecture
-✔ Machine Learning logic integration
-✔ Real financial data
-✔ Clean UI/UX
-✔ Authentication system
-✔ Scalable backend
-✔ Recruiter-friendly complexity
+This is not a simple CRUD application.
 
-This is not just a CRUD project —
-It integrates:
+It demonstrates:
 
-Data science concepts
-API handling
-Secure authentication
-Real-world stock data
-Mathematical forecasting
-🚀 Future Improvements
-LSTM Deep Learning Model
-Real-time WebSocket updates
+Mathematical forecasting logic
+Real financial API integration
+Full-stack architecture
+Secure authentication system
+Structured backend design
+Industry-style API responses
+Clean UI/UX implementation
+
+This project is ideal for:
+
+Portfolio showcase
+Full-stack interviews
+Data-driven web applications
+AI-integrated web systems
+🚀 Future Enhancements
+LSTM Deep Learning model
+WebSocket real-time updates
+Advanced interactive charts
+Portfolio tracker
 PostgreSQL production database
-Portfolio tracking system
-Chart visualization with advanced analytics
-Deployment on AWS / Render
+Docker containerization
+Cloud deployment (AWS / Render / Railway)
 👨‍💻 Developer
 
 Nikhil Mali
 Full Stack Developer
-React • Django • AI Enthusiast
+React • Django • Machine Learning Enthusiast
 
 📌 Disclaimer
 
-This system is built for educational and research purposes.
-Stock market investments carry financial risk.
+This project is built for educational and research purposes only.
+Stock market investments involve financial risk.
 
-⭐ If You Like This Project
+⭐ Support
 
-Give it a star on GitHub ⭐
+If you found this project useful:
 
-
----
+⭐ Star the repository
+🍴 Fork it
+📢 Share it
