@@ -1,70 +1,77 @@
-# 📈 Smart Stock Prediction System – Backend
+📈 Smart Stock Prediction System – Backend
 
-This is the backend of the **Smart Stock Prediction System**, an AI-powered stock forecasting platform built with Django and Django REST Framework.
+The backend of the Smart Stock Prediction System is a scalable and secure REST API built using Django and Django REST Framework.
 
-It provides REST APIs for stock predictions, featured stocks, news updates, user authentication, and feedback management.
+It powers AI-based stock forecasting, user authentication, news integration, and feedback management.
 
----
+This backend is designed with clean architecture, modular API design, and production-ready practices.
 
-## 🚀 Tech Stack
+🚀 Overview
 
-- 🐍 Python 3
-- 🌐 Django
-- 🔗 Django REST Framework
-- 🔐 JWT Authentication (SimpleJWT)
-- 📊 NumPy & Pandas
-- 📈 yFinance API
-- 📰 NewsAPI Integration
-- 🗄️ SQLite (Default) / PostgreSQL (Production Ready)
+The backend handles:
 
----
+🔐 Secure authentication using JWT
+📊 AI-driven stock trend prediction
+⭐ Featured Indian stock insights
+📰 Live financial news integration
+💬 User feedback management
+📡 RESTful API architecture
+🏗️ Tech Stack
+Core Technologies
+🐍 Python 3.x
+🌐 Django
+🔗 Django REST Framework
+Authentication
+🔐 JWT (SimpleJWT)
+Data & Prediction
+📊 NumPy
+📈 Pandas
+📉 Linear Regression Algorithm
+📡 yFinance API
+News Integration
 
-## ✨ Features
+📰 NewsAPI
+Database
+🗄 SQLite (Development)
+🗄 PostgreSQL (Production Ready)
 
-- 🔐 User Registration & Login (JWT Based)
-- 👤 Authenticated User Profile API
-- 📈 AI-based Stock Trend Prediction
-- ⭐ Featured Indian Stocks (Top 9 NSE Stocks)
-- 📰 Live Stock Market News
-- 💬 Feedback Submission API
-- 📊 Linear Regression-based Forecasting
-- 📦 Clean API Architecture
+✨ Key Features
+JWT-based User Registration & Login
+Authenticated User Profile API
+AI-based Stock Price Forecasting (6-month trend)
+Featured NSE Stock Insights
+Live Market News API
+Feedback Submission System
+Clean, Modular API Structure
+Production-ready backend design
 
----
-
-## 🏗️ Project Structure
-
+📂 Project Structure
 backend/
 │
 ├── app_name/
-│ ├── models.py
-│ ├── views.py
-│ ├── serializers.py
-│ └── urls.py
+│   ├── models.py
+│   ├── views.py
+│   ├── serializers.py
+│   └── urls.py
 │
 ├── project_name/
-│ ├── settings.py
-│ ├── urls.py
-│ └── wsgi.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
 │
-├── db.sqlite3
 ├── manage.py
+├── db.sqlite3
 └── requirements.txt
 
----
+⚙️ Installation & Setup
 
-## ⚙️ Installation & Setup
-
-### 1️⃣ Clone Repository
-
-```bash
-git clone https://github.com/YOUR_USERNAME/Stock-Prediction-AI.git
-2️⃣ Navigate to Backend
-cd backend
-3️⃣ Create Virtual Environment
+1️⃣ Clone Repository
+git clone https://github.com/nikhilkeshavmali/Smart-Stock-Price-Prediction-System.git
+cd Stock-Prediction-AI/backend
+2️⃣ Create Virtual Environment
 python -m venv venv
 
-Activate:
+Activate environment:
 
 Windows
 
@@ -73,89 +80,101 @@ venv\Scripts\activate
 Mac/Linux
 
 source venv/bin/activate
-4️⃣ Install Dependencies
+3️⃣ Install Dependencies
 pip install -r requirements.txt
 
-If requirements.txt not created yet:
+If requirements.txt is not created:
 
 pip install django djangorestframework djangorestframework-simplejwt yfinance numpy pandas requests
-
-Then generate:
-
 pip freeze > requirements.txt
-5️⃣ Run Migrations
+4️⃣ Run Migrations
 python manage.py migrate
-6️⃣ Start Development Server
+5️⃣ Start Development Server
 python manage.py runserver
 
-Server will run at:
+Backend runs at:
 
-http://127.0.0.1:8000
-🔐 Authentication System
+http://127.0.0.1:8000/
+🔐 Authentication System (JWT)
 
-Authentication is handled using JWT (JSON Web Tokens).
+Authentication uses JSON Web Tokens.
 
 Flow:
-User registers
-User logs in
+User registers via /api/register/
+User logs in via /api/login/
 Backend returns:
 access_token
 refresh_token
 Frontend sends token in header:
 Authorization: Bearer <access_token>
+
+Protected endpoints require a valid JWT.
+
 📡 API Endpoints
-🔐 Auth APIs
+
+🔐 Authentication APIs
 Method	Endpoint	Description
 POST	/api/register/	Register new user
 POST	/api/login/	Login user
-GET	/api/profile/	Get logged-in user profile
-📈 Stock APIs
+GET	/api/profile/	Get authenticated user profile
+
+📈 Stock Prediction APIs
 Method	Endpoint	Description
-POST	/api/stock/	Get stock prediction
-POST	/api/featured-stock/	Get top 9 NSE stocks
+POST	/api/stock/	Predict stock trend
+POST	/api/featured-stock/	Get top NSE stocks
+
 📰 News API
 Method	Endpoint	Description
-POST	/api/news/	Get latest stock market news
-💬 Feedback API
+POST	/api/news/	Get latest financial news
+
+💬 Feedback APIs
 Method	Endpoint	Description
 GET	/api/feedback/	Get all feedback
 POST	/api/feedback/	Submit feedback
+
 📊 Prediction Logic
 
-The stock prediction system:
+The stock prediction engine follows these steps:
 
-Fetches historical stock data using yFinance
-Applies Linear Regression using NumPy
-Forecasts next 6 months prices
-Generates AI-based insight:
-Bullish Trend
-Bearish Trend
-Stable Market
+Fetch historical stock data using yFinance
+Clean and preprocess data using Pandas
+Apply Linear Regression using NumPy
+Forecast next 6 months price trend
+Generate AI-based market insight:
+📈 Bullish Trend
+📉 Bearish Trend
+➖ Stable Market
 🌍 Environment Variables
 
-Create .env file:
+Create a .env file in backend root:
 
 NEWS_API_KEY=your_news_api_key
-🛡️ Security
-JWT Authentication
-Password Hashing (Django built-in)
-Authenticated profile endpoint
-Protected APIs
-🚀 Future Improvements
-🤖 Machine Learning (LSTM Model)
-📊 Real-time stock data via WebSockets
-🌐 Deployment on Render / Railway
-🗄️ PostgreSQL production database
-📈 Advanced Chart Analytics
-👨‍💻 Developer
 
+Make sure .env is added to .gitignore.
+
+
+
+🛡️ Security Practices
+JWT Authentication
+Django Password Hashing
+Protected Profile Endpoints
+Token-based Authorization
+Secure Environment Variables
+
+
+🚀 Future Improvements
+🤖 LSTM Deep Learning Model
+📊 Real-time WebSocket stock updates
+🌐 Deployment on AWS / Render / Railway
+🗄 PostgreSQL production database
+📈 Advanced AI-based technical indicators
+
+
+👨‍💻 Developer
 Nikhil Mali
 Full Stack Developer (React + Django)
+AI & Data-Driven Web Applications
 
 📜 License
 
-Developed for educational and portfolio purposes.
-
-
----
-```
+This project is developed for educational, academic, and portfolio purposes.
