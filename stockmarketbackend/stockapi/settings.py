@@ -33,11 +33,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
     "https://smart-stock-price-prediction-system.vercel.app",
 ]
-ALLOWED_HOSTS = [
-    "127.0.0.1",
-    "localhost",
-    ".onrender.com",
-]
+ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.1']
 APPEND_SLASH = True
 
 # Application definition
