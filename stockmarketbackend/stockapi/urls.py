@@ -36,4 +36,8 @@ urlpatterns = [
 
     # Feedback
     path("api/feedback/", FeedbackListCreateView.as_view()),
+
+
+    # for chatbot
+
 ]

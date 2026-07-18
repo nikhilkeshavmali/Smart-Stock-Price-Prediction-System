@@ -1,48 +1,45 @@
 interface NewsCardProps {
   title: string;
-  source: string;
-  time: string;
-  imageUrl: string;
-  url: string;
   description: string;
-  readTime: string;
+  source: string;
+  url: string;
+  image_url: string;
 }
 
 const NewsCard = ({
   title,
-  source,
-  time,
-  url,
   description,
-  readTime,
+  source,
+  url,
+  image_url,
 }: NewsCardProps) => {
-  const handleClick = () => {
-    window.open(url, "_blank", "noopener,noreferrer");
-  };
-
   return (
-    <div
-      className="glass-dark rounded-xl overflow-hidden transition-all duration-300 hover:translate-y-[-4px] hover:shadow-lg"
-      onClick={handleClick}
-      style={{ cursor: "pointer" }}
-    >
-      <div className="p-4">
-        <h3 className="font-semibold text-lg mb-2 line-clamp-2">
-          <a
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:underline"
-          >
-            {title}
-          </a>
-        </h3>
-        <p className="text-sm mb-2 line-clamp-5">{description}</p>
-        <div className="flex justify-between items-center text-sm text-muted-foreground">
-          <span>{source}</span>
-          <span>{time}</span>
-          <span>{readTime} min read</span>
-        </div>
+    <div className="border rounded-lg shadow p-4 hover:shadow-lg transition">
+      {image_url && (
+        <img
+          src={image_url}
+          alt={title}
+          className="w-full h-40 object-cover rounded mb-3"
+        />
+      )}
+
+      <h3 className="font-semibold text-lg mb-2">{title}</h3>
+
+      <p className="text-sm text-muted-foreground mb-2">
+        {description?.slice(0, 100)}...
+      </p>
+
+      <div className="flex justify-between items-center mt-3">
+        <span className="text-xs text-muted-foreground">{source}</span>
+
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-primary text-sm font-medium"
+        >
+          Read More →
+        </a>
       </div>
     </div>
   );

@@ -1,12 +1,18 @@
-import { ArrowUpIcon, ArrowDownIcon } from "lucide-react";
+import { TrendingUp, TrendingDown, Minus } from "lucide-react";
 
 interface StockCardProps {
-  stock: string; // e.g., "TATAMOTORS.NS"
-  company_name: string; // e.g., "Tata Motors Limited"
-  current_price_inr: number; // e.g., 64168.5
-  trend: "Up" | "Down" | "Neutral"; // Trend determines prediction
-  percentage_change: number; // e.g., 0.45
+  stock: string;
+  company_name: string;
+  current_price_inr: number;
+  trend: "Up" | "Down" | "Neutral";
+  percentage_change: number;
 }
+
+const TREND_STYLES = {
+  Up: { color: "#16c784", label: "BUY", Icon: TrendingUp },
+  Down: { color: "#ea3943", label: "SELL", Icon: TrendingDown },
+  Neutral: { color: "#8b93a3", label: "HOLD", Icon: Minus },
+} as const;
 
 const StockCard = ({
   stock,
@@ -15,48 +21,53 @@ const StockCard = ({
   trend,
   percentage_change,
 }: StockCardProps) => {
-  // Determine prediction based on trend
-  const prediction: "buy" | "sell" | "hold" =
-    trend === "Up" ? "buy" : trend === "Down" ? "sell" : "hold";
+  // Fall back to Neutral for any unexpected value so an unrecognized trend
+  // never silently reads as "Down" (red) the way a naive default would.
+  const { color, label, Icon } = TREND_STYLES[trend] ?? TREND_STYLES.Neutral;
 
-  // Function to assign color based on prediction
-  const getPredictionColor = (pred: string) => {
-    switch (pred) {
-      case "buy":
-        return "text-success"; // Green color
-      case "sell":
-        return "text-destructive"; // Red color
-      default:
-        return "text-muted-foreground"; // Grey color
-    }
-  };
+  // The change chip's direction follows the actual sign of percentage_change
+  // rather than the model's trend label -- they usually agree, but this
+  // keeps the arrow honest even in an edge case where they don't.
+  const changeUp = percentage_change > 0;
+  const changeFlat = percentage_change === 0;
+  const changeColor = changeFlat ? "#8b93a3" : changeUp ? "#16c784" : "#ea3943";
 
   return (
-    <div className="stock-card p-4 border rounded-lg shadow">
-      <div className="flex justify-between items-start mb-2">
+    <div className="bg-[#0a0d12] border border-[#1f2530] rounded-lg p-4 hover:border-[#2a3140] transition-colors">
+      <div className="flex justify-between items-start mb-3">
         <div>
-          <h3 className="font-semibold text-lg">{stock}</h3>
-          <p className="text-sm text-muted-foreground">{company_name}</p>
+          <h3 className="font-mono font-semibold text-base text-[#e6e9ef] tracking-tight">
+            {stock}
+          </h3>
+          <p className="text-xs text-[#6b7686] mt-0.5">{company_name}</p>
         </div>
-        <div
-          className={`px-3 py-1 rounded-full text-xs font-medium ${getPredictionColor(prediction)} bg-secondary`}
-        >
-          {prediction.toUpperCase()}
-        </div>
-      </div>
-      <div className="flex justify-between items-end mt-4">
-        <span className="text-xl font-bold">
-          ₹{current_price_inr?.toLocaleString() || "N/A"}
-        </span>
+
         <span
-          className={`flex items-center ${percentage_change >= 0 ? "text-success" : "text-destructive"}`}
+          className="flex items-center gap-1 px-2.5 py-1 rounded font-mono text-[10px] font-semibold uppercase tracking-widest shrink-0"
+          style={{ backgroundColor: `${color}1a`, color }}
         >
-          {percentage_change >= 0 ? (
-            <ArrowUpIcon className="w-4 h-4 mr-1" />
+          <Icon size={11} />
+          {label}
+        </span>
+      </div>
+
+      <div className="flex justify-between items-end">
+        <span className="font-mono text-xl font-semibold text-[#e6e9ef]">
+          ₹{current_price_inr?.toLocaleString("en-IN") ?? "N/A"}
+        </span>
+
+        <span
+          className="flex items-center gap-1 font-mono text-sm font-medium"
+          style={{ color: changeColor }}
+        >
+          {changeFlat ? (
+            <Minus className="w-3.5 h-3.5" />
+          ) : changeUp ? (
+            <TrendingUp className="w-3.5 h-3.5" />
           ) : (
-            <ArrowDownIcon className="w-4 h-4 mr-1" />
+            <TrendingDown className="w-3.5 h-3.5" />
           )}
-          {Math.abs(percentage_change)}%
+          {Math.abs(percentage_change).toFixed(2)}%
         </span>
       </div>
     </div>
