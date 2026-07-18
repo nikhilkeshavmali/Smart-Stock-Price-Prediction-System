@@ -31,7 +31,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG", "False") == "True"
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
-    "https://smart-stock-price-prediction-system.vercel.app/login",
+    "https://smart-stock-price-prediction-system.vercel.app",
 ]
 ALLOWED_HOSTS = [
     "127.0.0.1",
