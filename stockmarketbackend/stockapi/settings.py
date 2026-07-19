@@ -31,9 +31,9 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG", "False") == "True"
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
-    "https://smart-stock-price-prediction-system.vercel.app",
+    "https://smart-stock-price-prediction-system-4916sre5q.vercel.app",
 ]
-ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['smart-stock-price-prediction-system-1.onrender.com', 'localhost', '127.0.0.1']
 APPEND_SLASH = True
 
 # Application definition
