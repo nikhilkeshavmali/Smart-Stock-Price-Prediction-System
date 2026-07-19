@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: stockmarketbackend
+    env: python
+    rootDir: stockmarketbackend
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn stockapi.wsgi:application
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
