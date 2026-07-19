@@ -115,7 +115,9 @@ const Featured = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["featured-stocks"],
     queryFn: async () => {
-      const res = await fetch("http://127.0.0.1:8000/api/featured-stock/");
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/featured-stock/`,
+      );
       const json = await res.json();
       return json;
     },

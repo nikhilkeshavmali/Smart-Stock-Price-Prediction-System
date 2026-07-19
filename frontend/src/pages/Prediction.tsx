@@ -95,11 +95,14 @@ const Prediction = () => {
     if (!stock) return;
     try {
       setLoading(true);
-      const response = await fetch("http://127.0.0.1:8000/api/stock/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ stock, duration }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/stock/`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ stock, duration }),
+        },
+      );
       const data = await response.json();
       setPredictionData(data);
     } catch (error) {

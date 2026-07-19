@@ -18,7 +18,7 @@ const News = () => {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/api/news/")
+      .get(`${import.meta.env.VITE_API_URL}/api/news/`)
       .then((res) => {
         setNews(res.data);
         setLoading(false);
