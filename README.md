@@ -2,7 +2,9 @@
 
 # 📈 Smart Stock Prediction System
 
-**AI-Powered Market Forecasting & Investment Insight Platform for the Indian Stock Market (NSE)**
+> **Data-Driven Stock Market Forecasting Platform for the Indian Stock Market (NSE)**
+
+Predict market trends using mathematical forecasting, real-time financial data, and auto-generated investment insights.
 
 [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -17,13 +19,38 @@
 
 ---
 
+## 📚 Table of Contents
+
+- [Recognition](#-recognition)
+- [Overview](#-overview)
+- [Key Features](#-key-features)
+- [System Architecture](#️-system-architecture)
+- [Tech Stack](#️-tech-stack)
+- [Prediction Methodology](#-prediction-methodology)
+- [Design Decisions](#-design-decisions)
+- [Project Structure](#-project-structure)
+- [Getting Started](#-getting-started)
+- [API Endpoints](#-api-endpoints)
+- [Sample API Response](#-sample-api-response)
+- [Security](#-security)
+- [Performance](#-performance)
+- [Screenshots](#-screenshots)
+- [Why This Project Stands Out](#-why-this-project-stands-out)
+- [Roadmap](#️-roadmap)
+- [Developer](#-developer)
+- [License](#-license)
+- [Disclaimer](#-disclaimer)
+- [Support](#-support)
+
+---
+
 ## 🏆 Recognition
 
-> Acknowledged by **Nirmal Bang Securities** for its practical, data-driven approach to stock trend forecasting.
+> This project was acknowledged by **Nirmal Bang Securities** for demonstrating a practical approach to stock trend forecasting using real-time market data and mathematical prediction techniques.
 
 ## 📌 Overview
 
-**Smart Stock Prediction System** is a production-structured, full-stack financial analytics platform that helps retail investors understand stock trends using mathematical forecasting models. It combines real-time NSE market data, a custom regression-based prediction engine, and AI-generated insight summaries behind a secure, JWT-authenticated REST API.
+**Smart Stock Prediction System** is a production-structured, full-stack financial analytics platform that helps retail investors understand stock trends using mathematical forecasting models. It combines real-time NSE market data, a custom regression-based prediction engine, and auto-generated insight summaries behind a secure, JWT-authenticated REST API.
 
 Retail investors typically struggle with:
 
@@ -39,7 +66,7 @@ This project addresses that gap with 6-month trend forecasting, automated insigh
 |---|---|
 | 🔐 **Authentication** | JWT-based login/register, access & refresh tokens, protected profile route |
 | 📈 **Prediction Engine** | Custom NSE stock search, historical data selection, 6-month price forecast, bullish/bearish trend classification |
-| 🤖 **AI Insights** | Auto-generated, human-readable summaries explaining predicted momentum |
+| 🤖 **Auto-Generated Insights** | Human-readable summaries explaining predicted momentum |
 | ⭐ **Featured Stocks** | Curated dashboard of top NSE tickers (TCS, INFY, RELIANCE, HDFCBANK, ICICIBANK, SBIN, LT, ITC, HINDUNILVR) |
 | 📰 **Market News** | Live Indian stock market headlines via NewsAPI |
 | 💬 **Feedback System** | In-app user feedback, persisted to the backend |
@@ -100,6 +127,16 @@ The core forecasting engine uses **Least Squares Linear Regression** — chosen 
 
 This makes the output **explanatory, not just predictive.**
 
+## 💡 Design Decisions
+
+Least Squares Linear Regression was selected because it is:
+
+- Fast for real-time prediction
+- Easy to interpret
+- Lightweight
+- Requires minimal computational resources
+- Suitable for demonstrating forecasting concepts transparently, without the "black box" nature of heavier ML models
+
 ## 📂 Project Structure
 
 ```
@@ -147,6 +184,17 @@ npm run dev
 ```
 Runs at `http://localhost:5173/`
 
+## 🔌 API Endpoints
+
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/api/register/` | Register a new user |
+| POST | `/api/login/` | Login and receive JWT tokens |
+| GET | `/api/profile/` | Authenticated user profile |
+| POST | `/api/stock/` | Generate a stock prediction |
+| GET | `/api/news/` | Latest market news headlines |
+| POST | `/api/feedback/` | Submit user feedback |
+
 ## 📊 Sample API Response
 
 ```json
@@ -160,6 +208,35 @@ Runs at `http://localhost:5173/`
   "insight": "Strong bullish momentum detected."
 }
 ```
+
+## 🔒 Security
+
+- JWT authentication with access & refresh tokens
+- Protected routes on both frontend and backend
+- Secure password hashing
+- Environment variables used for API keys and secrets
+
+## ⚡ Performance
+
+- Optimized API response payloads
+- Cached frontend requests via TanStack Query
+- Lazy-loaded React pages
+- Responsive UI across devices
+- Modular backend architecture for maintainability
+
+## 📸 Screenshots
+
+### Home
+<img width="1901" height="927" alt="Home" src="https://github.com/user-attachments/assets/1c72d668-3c47-4aa5-81ac-f740eff99f0e" />
+
+### Prediction Dashboard
+<img width="1901" height="927" alt="Prediction Dashboard" src="https://github.com/user-attachments/assets/500971d2-005d-434a-a471-895d3cac3905" />
+
+### Stock Analysis
+<img width="1906" height="926" alt="Stock Analysis" src="https://github.com/user-attachments/assets/76eabc79-1c67-46e1-9237-f1f2722e19bc" />
+
+### Login
+<img width="1917" height="920" alt="Login" src="https://github.com/user-attachments/assets/ddc05c32-6818-45f4-9731-1070bee592f9" />
 
 ## 🎯 Why This Project Stands Out
 
@@ -181,17 +258,26 @@ This goes beyond a typical CRUD app — it demonstrates:
 - [ ] PostgreSQL production database
 - [ ] Docker containerization
 - [ ] Cloud deployment (AWS / Render / Railway)
+- [ ] Sentiment analysis on market news
+- [ ] AI chat assistant for investment insights
 
 ## 👨‍💻 Developer
 
 **Nikhil Mali**
-Full Stack Developer — React · Django · Machine Learning Enthusiast
+Full Stack Developer — React · Django · TypeScript · Python · Machine Learning Enthusiast
 
+📧 Email · 💼 LinkedIn · 🌐 [Portfolio](https://nikhilkeshavmali.vercel.app) · 🐙 [GitHub](https://github.com/nikhilkeshavmali)
+
+## 📄 License
+
+© 2026 Nikhil Mali. All Rights Reserved.
+
+This repository is provided for educational and portfolio purposes only. You may view the source code, but you may not copy, redistribute, modify, or use it in commercial or production environments without prior written permission.
 
 ## 📌 Disclaimer
 
-This project is built for educational and research purposes only. Stock market investments involve financial risk, and predictions here should not be treated as financial advice.
+This project is built for educational and research purposes only. Predictions generated by this application are based on historical market trends and mathematical models. They should not be interpreted as investment recommendations or financial advice.
 
 ## ⭐ Support
 
-If you found this project useful, consider giving it a star, forking it, or sharing it with others.
+If you found this project interesting, consider giving it a star.
