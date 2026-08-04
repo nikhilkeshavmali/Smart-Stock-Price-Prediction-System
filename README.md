@@ -65,7 +65,7 @@ This project addresses that gap with 6-month trend forecasting, automated insigh
 | Category | Capabilities |
 |---|---|
 | 🔐 **Authentication** | JWT-based login/register, access & refresh tokens, protected profile route |
-| 📈 **Prediction Engine** | Custom NSE stock search, historical data selection, 6-month price forecast, bullish/bearish trend classification |
+| 📈 **Prediction Engine** | Custom NSE stock search, historical data selection, 1 week to 5 year's price forecast, bullish/bearish trend classification |
 | 🤖 **Auto-Generated Insights** | Human-readable summaries explaining predicted momentum |
 | ⭐ **Featured Stocks** | Curated dashboard of top NSE tickers (TCS, INFY, RELIANCE, HDFCBANK, ICICIBANK, SBIN, LT, ITC, HINDUNILVR) |
 | 📰 **Market News** | Live Indian stock market headlines via NewsAPI |
